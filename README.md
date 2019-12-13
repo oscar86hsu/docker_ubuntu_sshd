@@ -40,6 +40,7 @@ Using the image with the default password is dangerous. You should change your p
 - To not use password and use key instead:<br>
 ```
 docker exec ubuntu_sshd passwd -d root
+docker exec ubuntu_sshd sed -i 's/.*PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 ssh-keygen -t rsa -f ./id_rsa -N ""
 docker cp id_rsa.pub ubuntu_sshd:/root/.ssh/authorized_keys
 docker exec ubuntu_sshd chown root:root /root/.ssh/authorized_keys
